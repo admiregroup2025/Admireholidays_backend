@@ -132,7 +132,7 @@ adminRoute.post(
   uploadMedia.single('video'), // ⬅️ only expecting one uploaded video
   createItinerary
 );
-adminRoute.get('/itinerary', auth, getAllItinerary);
+adminRoute.get('/itinerary',  getAllItinerary);
 adminRoute.get('/itinerary-details/:id', auth, getItineraryById);
 adminRoute.delete('/itinerary/:id', auth, authorizeAdmin, deleteItinerary);
 adminRoute.patch('/itinerary/:id', auth, uploadMedia.single('destination_video'), updateItinerary);

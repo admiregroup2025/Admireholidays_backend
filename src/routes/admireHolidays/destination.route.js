@@ -10,11 +10,13 @@ import {
   getInternationalHolidaysPackages,
   getItineraryByDestinationId,
   getAllTrendingDestination,
+  testing,
   // getWeekendTrendingItineraries
 } from '../../controller/destination.controller.js';
 
 const destinationRoute = express.Router();
-destinationRoute.get('/home/get',getAllTrendingDestination)
+destinationRoute.get('/home/get', getAllTrendingDestination);
+destinationRoute.get('/test', testing);
 destinationRoute.get('/image-gallery/:type', getImageGalleryByType); // Fetch image gallery by type
 // destinationRoute.get('/itineraries/:place', getItineraryByDestinationId); // Fetch itineraries by place
 destinationRoute.get('/itinerary/:id', getSingleItineraryById); // Fetch single itinerary by ID

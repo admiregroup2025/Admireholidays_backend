@@ -12,29 +12,23 @@ import userRouter from './routes/admireHolidays/user.route.js';
 import adminRoute from './routes/adminRoutes/admin.route.js';
 import customerGalleryRoute from './routes/admireHolidays/customerGallery.route.js';
 import heroSectionRoute from './routes/admireHolidays/heroSection.route.js';
-import heroroutes from "./routes/adminRoutes/heroroutes.js"
+import heroroutes from './routes/adminRoutes/heroroutes.js';
 import { corsOptions } from './config/corsoptions.js';
-import itinaray from "./routes/admireHolidays/itinarayRoutes.js"
+import itinaray from './routes/admireHolidays/itinarayRoutes.js';
+import getImageGallery from './routes/admireHolidays/imageGalleryRoutes.js';
+import { get } from 'mongoose';
 const app = express();
 app.use(cookieParser());
-app.use(express.json());
-
-
-
-
+// app.use(express.json());
 
 app.use(cors(corsOptions));
-app.use(express.json())
-
-
+app.use(express.json());
 
 connectDB();
 
 app.get('/', (req, res) => {
   res.json({ status: 'API is working', version: '1.0' });
 });
-
-
 
 // Middleware to log requests
 app.use('/api/v1/', leadsRoute);
@@ -46,11 +40,11 @@ app.use('/api/v1/', customerGalleryRoute);
 app.use('/api/v1', heroSectionRoute);
 app.use('/admin', adminRoute);
 app.use('/admin/hero', heroroutes);
-app.use('/getpackage',itinaray )
+app.use('/getpackage', itinaray);
+app.use('/image', getImageGallery);
 
-// Temp 
+// Temp
 app.get('/temp', (req, res) => {
-  
   res.json({ message: 'Temporary endpoint for testing' });
 });
 

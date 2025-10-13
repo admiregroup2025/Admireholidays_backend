@@ -107,19 +107,19 @@ export const getTrendingDestination = async (req, res) => {
   }
 };
 export const getAllTrendingDestination = async (req, res) => {
-  console.log("run1")
+  // console.log('run1');
   try {
-    console.log("run2")
-    const data = await DestinationInternationAndDomesticModel.find({})
-    if(!data){
-      return res.status(404).json({message:"No data found"})
+    // console.log('run2');
+    const data = await DestinationInternationAndDomesticModel.find({});
+    if (!data) {
+      return res.status(404).json({ message: 'No data found' });
     }
-    return res.status(200).json({success:true,data})
+    return res.status(200).json({ success: true, data });
   } catch (error) {
-    console.log(error)
-    return res.status(500).json({message:"server error"})
+    console.log(error);
+    return res.status(500).json({ message: 'server error' });
   }
-}
+};
 
 // getting International Holidays packages
 export const getInternationalHolidaysPackages = async (req, res) => {
@@ -133,10 +133,11 @@ export const getInternationalHolidaysPackages = async (req, res) => {
         .status(404)
         .json({ success: false, message: 'No International Holidays packages found' });
     }
-     const filteredItineraries = internationalHolidaysPackage.filter(
+    const filteredItineraries = internationalHolidaysPackage.filter(
       (itinerary) => itinerary.selected_destination !== null
     );
-
+    console.log(filteredItineraries);
+    console.log(filteredItineraries);
     return res.status(200).json({ success: true, data: filteredItineraries });
   } catch (error) {
     console.error('Error in getInternationalHolidaysPackages:', error);
@@ -219,5 +220,72 @@ export const getItineraryByDestinationId = async (req, res) => {
   } catch (error) {
     console.error('Error in getItineraryByDestinationId:', error);
     res.status(500).json({ success: false, message: 'Server Error' });
+  }
+};
+
+// export const testing = async (req, res) => {
+//   try {
+//     console.log("running")
+//     // Find all itineraries where domestic_or_international = "international"
+//     const internationalHolidaysPackage = await itineraryModel.find({
+//       domestic_or_international: 'international',
+//     });
+//     console.log(internationalHolidaysPackage)
+//     if (internationalHolidaysPackage.length === 0) {
+//       console.log('here');
+//       return res.status(404).json({
+//         success: false,
+//         message: 'No International Holidays packages found',
+//       });
+//     }
+
+//     res.status(200).json({
+//       success: true,
+//       data: internationalHolidaysPackage,
+//     });
+//   } catch (error) {
+//     console.error('Error in testing controller:', error);
+//     res.status(500).json({
+//       success: false,
+//       message: 'Server Error',
+//     });
+//   }
+// };
+
+
+export const testing = async (req, res) => {
+  try {
+    console.log("Running /testing");
+
+    // ✅ Log all data for debugging
+    const allDocs = await itineraryModel.find({});
+    console.log("ALL DOCUMENTS:", allDocs);
+
+    // ✅ Exact query (case-sensitive)
+    const result = await itineraryModel.find({
+      domestic_or_international: "international", // ← matches your data exactly
+    });
+
+    console.log("Query Result:", result);
+
+    if (result.length === 0) {
+      console.log("No international itineraries found");
+      return res.status(404).json({
+        success: false,
+        message: "No International Holidays packages found",
+      });
+    }
+
+    // ✅ Success
+    return res.status(200).json({
+      success: true,
+      data: result,
+    });
+  } catch (error) {
+    console.error("Error in /testing:", error);
+    return res.status(500).json({
+      success: false,
+      message: "Server Error",
+    });
   }
 };

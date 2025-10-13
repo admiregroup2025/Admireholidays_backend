@@ -110,9 +110,9 @@ export const createItinerary = async (req, res) => {
 export const getAllItinerary = async (req, res) => {
   try {
     const itineraries = await itineraryModel
-      .find()
-      .populate('selected_destination')
-      .sort({ createdAt: -1 }); //find the itineraries according to the latest created date
+      .find({})
+      // .populate('selected_destination')
+      // .sort({ createdAt: -1 }); //find the itineraries according to the latest created date
     console.log('Fetched Itineraries:', itineraries);
     return res.status(200).json({
       success: true,
@@ -127,6 +127,9 @@ export const getAllItinerary = async (req, res) => {
     });
   }
 };
+
+
+
 
 export const getItineraryById = async (req, res) => {
   try {
