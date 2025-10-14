@@ -84,6 +84,8 @@ import {
   getSingleBlog,
 } from '../../controller/admin/Blog.admin.controller.js';
 
+import { createResort } from '../../controller/admin/resortController.js';
+
 const adminRoute = express.Router();
 
 //Admine Authenticatiomn Section
@@ -196,4 +198,7 @@ adminRoute.get('/blog/:blogId', auth, getSingleBlog);
 adminRoute.patch('/blog/:blogId', auth, uploadMedia.single('coverImage'), updateBlog);
 adminRoute.delete('/blog/:blogId', auth, authorizeAdmin, deleteBlog);
 
+
+
+adminRoute.get("/",createResort)
 export default adminRoute;
