@@ -6,7 +6,7 @@ export const generateToken = (userID, role = null) => {
     payload.role = role; // Include role only if provided
   }
 
-  return jwt.sign(payload, process.env.JWT_SECRET, { expiresIn: '7d' });
+  return jwt.sign(payload, process.env.JWT_SECRET, { expiresIn: '1d' });
 };
 
 export const formatCountryName = (name) => {
